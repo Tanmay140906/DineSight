@@ -1,0 +1,10 @@
+Flask
+gunicorn
+python-dotenv
+
+pandas
+numpy
+scipy
+
+langchain-core
+langchain-google-genai

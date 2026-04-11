@@ -359,7 +359,7 @@
         method: "POST",
         body: formData
       });
-
+      alert("res recieved");
       const data = await res.json();
       console.log("Analysis result received:", data);
       alert("Analysis complete! Redirecting to insights dashboard.");
@@ -370,9 +370,8 @@
 
     } catch (err) {
       output.textContent = "Error running analysis";
-    } finally {
-      runBtn.disabled = false;
-      runBtn.textContent = "Run Analysis";
+      console.error(err);
+      alert(err.message);
     }
   });
 </script>

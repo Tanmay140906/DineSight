@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html class="dark" lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DineSight – Qualitative Analysis Report</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
   <script>
     tailwind.config = {
@@ -47,42 +50,54 @@
     }
   </script>
   <style>
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: #0f1619; }
-    ::-webkit-scrollbar-thumb { background: #2a3b42; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #3c525b; }
-    
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0f1619;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #2a3b42;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3c525b;
+    }
+
     .slide {
       min-height: 100vh;
       scroll-snap-align: start;
     }
-    
+
     .stat-card {
       background: linear-gradient(135deg, rgba(13, 204, 242, 0.05) 0%, rgba(24, 35, 39, 0.5) 100%);
       border: 1px solid rgba(13, 204, 242, 0.2);
       transition: all 0.3s ease;
     }
-    
+
     .stat-card:hover {
       border-color: rgba(13, 204, 242, 0.4);
       box-shadow: 0 0 25px -5px rgba(13, 204, 242, 0.2);
     }
-    
+
     .concern-card {
       background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(24, 35, 39, 0.5) 100%);
       border: 1px solid rgba(239, 68, 68, 0.25);
     }
-    
+
     .positive-card {
       background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(24, 35, 39, 0.5) 100%);
       border: 1px solid rgba(16, 185, 129, 0.25);
     }
-    
+
     .insight-card {
       background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(24, 35, 39, 0.5) 100%);
       border: 1px solid rgba(139, 92, 246, 0.25);
     }
-    
+
     .metric-label {
       font-size: 11px;
       font-weight: 700;
@@ -90,7 +105,7 @@
       letter-spacing: 0.1em;
       color: #94a3a8;
     }
-    
+
     .metric-value {
       font-size: 32px;
       font-weight: 800;
@@ -99,7 +114,7 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    
+
     .section-title {
       font-size: 14px;
       font-weight: 700;
@@ -107,34 +122,64 @@
       letter-spacing: 0.15em;
       color: #0dccf2;
     }
-    
-    table { border-collapse: collapse; width: 100%; }
-    thead { background-color: rgba(15, 22, 25, 0.9); border-bottom: 2px solid rgba(42, 59, 66, 0.8); }
-    tbody tr { border-bottom: 1px solid rgba(42, 59, 66, 0.4); transition: background-color 0.2s; }
-    tbody tr:hover { background-color: rgba(13, 204, 242, 0.05); }
-    th, td { padding: 14px 16px; text-align: left; }
-    th { font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #94a3a8; }
-    td { font-size: 14px; color: #e0e6e8; }
-    
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    thead {
+      background-color: rgba(15, 22, 25, 0.9);
+      border-bottom: 2px solid rgba(42, 59, 66, 0.8);
+    }
+
+    tbody tr {
+      border-bottom: 1px solid rgba(42, 59, 66, 0.4);
+      transition: background-color 0.2s;
+    }
+
+    tbody tr:hover {
+      background-color: rgba(13, 204, 242, 0.05);
+    }
+
+    th,
+    td {
+      padding: 14px 16px;
+      text-align: left;
+    }
+
+    th {
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #94a3a8;
+    }
+
+    td {
+      font-size: 14px;
+      color: #e0e6e8;
+    }
+
     .progress-bar {
       height: 8px;
       background: rgba(42, 59, 66, 0.6);
       border-radius: 4px;
       overflow: hidden;
     }
-    
+
     .progress-fill {
       height: 100%;
       border-radius: 4px;
       transition: width 0.8s ease;
     }
-    
+
     .quote-card {
       position: relative;
       padding-left: 20px;
       border-left: 3px solid #0dccf2;
     }
-    
+
     .quote-card::before {
       content: '"';
       position: absolute;
@@ -144,7 +189,7 @@
       color: rgba(13, 204, 242, 0.2);
       font-family: Georgia, serif;
     }
-    
+
     .tier-badge {
       display: inline-flex;
       align-items: center;
@@ -155,28 +200,37 @@
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
-    
+
     .animate-pulse-slow {
       animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     }
-    
+
     @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
-    
+
     .fade-in-up {
       animation: fadeInUp 0.6s ease forwards;
     }
-    
-    .loading-cloak { opacity: 0; }
-    
+
+    .loading-cloak {
+      opacity: 0;
+    }
+
     .glass-card {
       background: rgba(24, 35, 39, 0.7);
       backdrop-filter: blur(10px);
       border: 1px solid rgba(42, 59, 66, 0.5);
     }
-    
+
     .root-cause-tag {
       display: inline-flex;
       align-items: center;
@@ -189,7 +243,7 @@
       border: 1px solid rgba(239, 68, 68, 0.3);
       color: #fca5a5;
     }
-    
+
     .summary-item {
       position: relative;
       padding: 20px 24px 20px 60px;
@@ -198,12 +252,12 @@
       border-radius: 12px;
       transition: all 0.3s ease;
     }
-    
+
     .summary-item:hover {
       border-color: rgba(13, 204, 242, 0.3);
       transform: translateX(5px);
     }
-    
+
     .summary-item .number {
       position: absolute;
       left: 16px;
@@ -223,23 +277,27 @@
   </style>
 </head>
 
-<body class="bg-background-dark text-text-light font-display antialiased overflow-x-hidden selection:bg-primary/30 selection:text-primary">
+<body
+  class="bg-background-dark text-text-light font-display antialiased overflow-x-hidden selection:bg-primary/30 selection:text-primary">
 
   <!-- Navigation Bar -->
   <header class="sticky top-0 z-50 w-full border-b border-border-dark bg-background-dark/95 backdrop-blur-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex h-16 items-center justify-between">
         <div class="flex items-center gap-3">
-          <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-primary via-accent-purple to-accent-pink text-white shadow-neon">
+          <div
+            class="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-primary via-accent-purple to-accent-pink text-white shadow-neon">
             <span class="material-symbols-outlined text-[22px]">psychology</span>
           </div>
           <div>
             <span class="text-xl font-bold tracking-tight">DineSight</span>
-            <span class="hidden sm:inline text-xs text-text-muted ml-2 px-2 py-0.5 rounded bg-surface-dark">Qualitative Analysis</span>
+            <span class="hidden sm:inline text-xs text-text-muted ml-2 px-2 py-0.5 rounded bg-surface-dark">Qualitative
+              Analysis</span>
           </div>
         </div>
         <div class="flex items-center gap-3">
-          <button onclick="window.print()" class="hidden sm:inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2.5 text-sm font-bold text-background-dark transition-all hover:bg-primary-hover hover:shadow-neon">
+          <button onclick="window.print()"
+            class="hidden sm:inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2.5 text-sm font-bold text-background-dark transition-all hover:bg-primary-hover hover:shadow-neon">
             <span class="material-symbols-outlined text-[18px] mr-2">download</span>
             Export Report
           </button>
@@ -253,18 +311,21 @@
     <div class="text-center">
       <div class="relative">
         <div class="animate-spin rounded-full h-16 w-16 border-4 border-primary/20 border-t-primary mx-auto mb-6"></div>
-        <span class="material-symbols-outlined text-primary text-2xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">insights</span>
+        <span
+          class="material-symbols-outlined text-primary text-2xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">insights</span>
       </div>
       <p class="text-xl font-semibold">Analyzing Qualitative Data...</p>
-      <p class="text-sm text-text-muted mt-2">Processing verbatim insights and theme extraction</p>
+      <p class="text-sm text-text-muted mt-2">Processing customer insights..</p>
     </div>
   </div>
 
   <!-- Main Container -->
-  <main class="flex-grow overflow-y-auto scroll-smooth loading-cloak transition-opacity duration-500" id="reportContainer" style="scroll-snap-type: y mandatory;">
+  <main class="flex-grow overflow-y-auto scroll-smooth loading-cloak transition-opacity duration-500"
+    id="reportContainer" style="scroll-snap-type: y mandatory;">
 
     <!-- SLIDE 1: EXECUTIVE SUMMARY -->
-    <section class="slide bg-gradient-to-b from-background-dark via-surface-darker to-surface-dark px-4 sm:px-6 lg:px-8 py-16">
+    <section
+      class="slide bg-gradient-to-b from-background-dark via-surface-darker to-surface-dark px-4 sm:px-6 lg:px-8 py-16">
       <div class="max-w-7xl mx-auto">
         <div class="mb-10">
           <div class="flex items-center gap-3 mb-4">
@@ -274,12 +335,15 @@
             </span>
           </div>
           <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight mb-4">
-            Qualitative <span class="bg-gradient-to-r from-primary via-accent-purple to-accent-pink bg-clip-text text-transparent">Voice of Customer</span>
+            Qualitative <span
+              class="bg-gradient-to-r from-primary via-accent-purple to-accent-pink bg-clip-text text-transparent">Voice
+              of Customer</span>
           </h1>
           <p class="text-lg text-text-muted max-w-3xl">
-            Deep-dive analysis of <span class="text-primary font-semibold">{{TOTAL_REVIEWS}}</span> customer verbatims across 
-            <span class="text-accent-amber font-semibold">{{NUMBER_OF_CITIES}} cities</span> and 
-            <span class="text-accent-purple font-semibold">{{NUMBER_OF_CUISINES}} cuisines</span>, 
+            Deep-dive analysis of <span class="text-primary font-semibold">{{TOTAL_REVIEWS}}</span> customer verbatims
+            across
+            <span class="text-accent-amber font-semibold">{{NUMBER_OF_CITIES}} cities</span> and
+            <span class="text-accent-purple font-semibold">{{NUMBER_OF_CUISINES}} cuisines</span>,
             uncovering actionable insights from {{DATE_RANGE}}.
           </p>
         </div>
@@ -303,17 +367,6 @@
             <p class="metric-value mt-1">{{AVERAGE_RATING}}</p>
           </div>
         </div>
-
-        <!-- Executive Summary Cards -->
-        <div class="mb-8">
-          <h2 class="section-title mb-6 flex items-center gap-2">
-            <span class="material-symbols-outlined text-[18px]">summarize</span>
-            Executive Summary
-          </h2>
-          <div class="space-y-4" id="summaryContainer">
-            {{SUMMARY_ITEMS}}
-          </div>
-        </div>
       </div>
     </section>
 
@@ -327,7 +380,8 @@
             </span>
           </div>
           <h2 class="text-3xl sm:text-4xl font-black tracking-tight mb-2">Issue Domain Distribution</h2>
-          <p class="text-text-muted max-w-2xl">High-level categorization of all customer feedback into primary experience domains.</p>
+          <p class="text-text-muted max-w-2xl">High-level categorization of all customer feedback into primary
+            experience domains.</p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
@@ -402,7 +456,8 @@
               <div class="flex items-center gap-3">
                 <span class="material-symbols-outlined text-info">info</span>
                 <p class="text-sm text-text-muted">
-                  <strong class="text-text-light">{{TOTAL_VALID_REVIEWS}}</strong> reviews were processed for Tier 1 classification using NLP-based domain detection.
+                  <strong class="text-text-light">{{TOTAL_VALID_REVIEWS}}</strong> reviews were processed for Tier 1
+                  classification using NLP-based domain detection.
                 </p>
               </div>
             </div>
@@ -500,7 +555,8 @@
             </span>
           </div>
           <h2 class="text-3xl sm:text-4xl font-black tracking-tight mb-2">Dish-Level Failure Analysis</h2>
-          <p class="text-text-muted max-w-2xl">Granular breakdown of which dishes are failing and why, based on <strong class="text-text-light">{{TIER3_TOTAL_NEGATIVE}}</strong> negative food reviews.</p>
+          <p class="text-text-muted max-w-2xl">Granular breakdown of which dishes are failing and why, based on <strong
+              class="text-text-light">{{TIER3_TOTAL_NEGATIVE}}</strong> negative food reviews.</p>
         </div>
 
         <!-- Top Dishes Table -->
@@ -542,7 +598,8 @@
           <div class="border-t border-border-dark pt-4 mt-4">
             <p class="text-sm text-text-muted">
               <span class="material-symbols-outlined text-info text-[16px] align-middle mr-1">lightbulb</span>
-              These root causes represent the most frequent complaint phrases extracted from negative reviews, each mapped to specific subthemes for actionable insights.
+              These root causes represent the most frequent complaint phrases extracted from negative reviews, each
+              mapped to specific subthemes for actionable insights.
             </p>
           </div>
         </div>
@@ -560,7 +617,8 @@
             </span>
           </div>
           <h2 class="text-3xl sm:text-4xl font-black tracking-tight mb-2">Top Genuine Concerns</h2>
-          <p class="text-text-muted max-w-2xl">Prioritized concerns ranked by their <strong class="text-primary">Concern Score</strong> – a composite metric combining frequency, sentiment, and impact.</p>
+          <p class="text-text-muted max-w-2xl">Prioritized concerns ranked by their <strong class="text-primary">Concern
+              Score</strong> – a composite metric combining frequency, sentiment, and impact.</p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10" id="concernsContainer">
@@ -606,7 +664,8 @@
             </span>
           </div>
           <h2 class="text-3xl sm:text-4xl font-black tracking-tight mb-2">Top Relevant Quotes</h2>
-          <p class="text-text-muted max-w-2xl">Most impactful customer verbatims ranked by AI-powered relevance scoring algorithm.</p>
+          <p class="text-text-muted max-w-2xl">Most impactful customer verbatims ranked by AI-powered relevance scoring
+            algorithm.</p>
         </div>
 
         <div class="space-y-6" id="quotesContainer">
@@ -619,8 +678,8 @@
             Understanding Relevance Scores
           </h4>
           <p class="text-sm text-text-muted">
-            Relevance scores are calculated using a TF-IDF based algorithm that weighs phrase uniqueness, 
-            sentiment intensity, and thematic importance. Higher scores indicate phrases that are both 
+            Relevance scores are calculated using a TF-IDF based algorithm that weighs phrase uniqueness,
+            sentiment intensity, and thematic importance. Higher scores indicate phrases that are both
             distinctive and representative of broader customer concerns.
           </p>
         </div>
@@ -632,13 +691,15 @@
       <div class="max-w-7xl mx-auto">
         <div class="mb-10">
           <div class="flex items-center gap-3 mb-4">
-            <span class="tier-badge bg-gradient-to-r from-primary/20 to-accent-purple/20 text-primary border border-primary/30">
+            <span
+              class="tier-badge bg-gradient-to-r from-primary/20 to-accent-purple/20 text-primary border border-primary/30">
               <span class="material-symbols-outlined text-[14px] mr-1">join</span>
               Integration Layer
             </span>
           </div>
           <h2 class="text-3xl sm:text-4xl font-black tracking-tight mb-2">Quantitative-Qualitative Bridge</h2>
-          <p class="text-text-muted max-w-2xl">Connecting statistical insights with customer voice to create a unified understanding.</p>
+          <p class="text-text-muted max-w-2xl">Connecting statistical insights with customer voice to create a unified
+            understanding.</p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
@@ -683,7 +744,8 @@
               <div class="p-4 rounded-lg bg-background-dark/50 border-l-4 border-warning">
                 <p class="text-sm font-semibold mb-1">Top Root Cause Impact</p>
                 <p class="text-lg font-bold text-warning capitalize">{{TOP_ROOT_CAUSE}}</p>
-                <p class="text-xs text-text-muted mt-1">{{TOP_ROOT_CAUSE_COUNT}} mentions @ {{TOP_ROOT_CAUSE_RATING}}★ avg</p>
+                <p class="text-xs text-text-muted mt-1">{{TOP_ROOT_CAUSE_COUNT}} mentions @ {{TOP_ROOT_CAUSE_RATING}}★
+                  avg</p>
               </div>
               <div class="p-4 rounded-lg bg-background-dark/50 border-l-4 border-primary">
                 <p class="text-sm font-semibold mb-1">Theme Density</p>
@@ -731,7 +793,8 @@
             </span>
           </div>
           <h2 class="text-3xl sm:text-4xl font-black tracking-tight mb-2">Strategic Recommendations</h2>
-          <p class="text-text-muted max-w-2xl">Data-driven action items to improve customer satisfaction based on comprehensive analysis.</p>
+          <p class="text-text-muted max-w-2xl">Data-driven action items to improve customer satisfaction based on
+            comprehensive analysis.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
@@ -857,14 +920,15 @@
     <section class="bg-surface-darker px-4 sm:px-6 lg:px-8 py-12 border-t border-border-dark">
       <div class="max-w-7xl mx-auto text-center">
         <div class="flex items-center justify-center gap-3 mb-4">
-          <div class="h-10 w-10 rounded-lg bg-gradient-to-br from-primary via-accent-purple to-accent-pink flex items-center justify-center">
+          <div
+            class="h-10 w-10 rounded-lg bg-gradient-to-br from-primary via-accent-purple to-accent-pink flex items-center justify-center">
             <span class="material-symbols-outlined text-white text-xl">psychology</span>
           </div>
           <span class="text-xl font-bold">DineSight</span>
         </div>
         <p class="text-text-muted mb-2">Qualitative Voice of Customer Analysis Report</p>
         <p class="text-sm text-text-muted">
-          Generated: <span class="text-primary font-medium">{{GENERATED_AT}}</span> | 
+          Generated: <span class="text-primary font-medium">{{GENERATED_AT}}</span> |
           Data Range: <span class="text-primary font-medium">{{DATE_RANGE}}</span>
         </p>
         <p class="text-xs text-text-muted mt-4 opacity-50">Powered by AI-driven NLP & Statistical Analysis</p>
@@ -874,447 +938,271 @@
   </main>
 
   <script>
-    // Chart instances
     let tier1Chart = null;
     let tier2Chart = null;
 
-    function injectReportData(reportData) {
-      if (!reportData || !reportData.analysis_results) {
-        console.error("Invalid report data structure");
-        return;
-      }
+    const STORE_KEY = "analysis_result";
 
-      const container = document.getElementById('reportContainer');
-      let htmlContent = container.innerHTML;
+    const $ = (id) => document.getElementById(id);
+    const safe = (v, d = "-") => (v === undefined || v === null || v === "" ? d : v);
+    const num = (v, d = 0) => Number(v ?? d);
+    const fmt = (v, digits = 1) => Number(v ?? 0).toFixed(digits);
 
-      // --- DATA EXTRACTION ---
-      const results = reportData.analysis_results.results || {};
-      const verbatimAnalysis = results.multilayer_verbatim_analysis || {};
-      const quantAnalysis = results.quantitative_analysis || {};
-      const quoteScoring = results.quote_relevance_scoring || [];
-      const themeInsights = results.theme_insights || {};
-      const summaryPoints = reportData.analysis_results.result_summary || [];
-
-      const tier1 = verbatimAnalysis.tier_1 || {};
-      const tier2 = verbatimAnalysis.tier_2 || {};
-      const tier3 = verbatimAnalysis.tier_3 || {};
-
-      const keyInsights = quantAnalysis.stage_1_descriptive_statistics?.key_insights || {};
-      const byCity = quantAnalysis.stage_1_descriptive_statistics?.by_city || {};
-      const statTests = quantAnalysis.stage_2_statistical_tests || {};
-      const outliers = quantAnalysis.stage_3_outlier_detection || {};
-
-      // --- GENERAL METRICS ---
-      htmlContent = htmlContent.replace(/{{TOTAL_REVIEWS}}/g, keyInsights["Total Reviews"] || 0);
-      htmlContent = htmlContent.replace(/{{NUMBER_OF_CITIES}}/g, keyInsights["Number of Cities"] || 0);
-      htmlContent = htmlContent.replace(/{{NUMBER_OF_CUISINES}}/g, keyInsights["Number of Cuisines"] || 0);
-      htmlContent = htmlContent.replace(/{{NUMBER_OF_RESTAURANTS}}/g, keyInsights["Number of Restaurants"] || 0);
-      htmlContent = htmlContent.replace(/{{DATE_RANGE}}/g, keyInsights["Date Range"] || "N/A");
-      htmlContent = htmlContent.replace(/{{AVERAGE_RATING}}/g, keyInsights["Average Rating"] || "0.0");
-      htmlContent = htmlContent.replace(/{{STD_DEV_RATING}}/g, keyInsights["Std Dev Rating"] || "0.0");
-      htmlContent = htmlContent.replace(/{{TOTAL_THEME_MENTIONS}}/g, themeInsights.summary?.total_theme_mentions || 0);
-      htmlContent = htmlContent.replace(/{{TOTAL_VALID_REVIEWS}}/g, tier1.total_valid_reviews || 0);
-
-      // Theme Density
-      const themeDensity = themeInsights.summary?.total_theme_mentions && keyInsights["Total Reviews"] 
-        ? (themeInsights.summary.total_theme_mentions / keyInsights["Total Reviews"]).toFixed(2) 
-        : "N/A";
-      htmlContent = htmlContent.replace(/{{THEME_DENSITY}}/g, themeDensity);
-
-      // --- SUMMARY ITEMS ---
-      let summaryHTML = '';
-      summaryPoints.forEach((point, idx) => {
-        summaryHTML += `
-          <div class="summary-item fade-in-up" style="animation-delay: ${idx * 0.1}s">
-            <span class="number">${idx + 1}</span>
-            <p class="text-sm leading-relaxed">${point}</p>
-          </div>
-        `;
-      });
-      htmlContent = htmlContent.replace(/{{SUMMARY_ITEMS}}/g, summaryHTML);
-
-      // --- TIER 1 DATA ---
-      const issueDistribution = tier1.issue_distribution || [];
-      let goodExp = { count: 0, percentage: 0 };
-      let foodProb = { count: 0, percentage: 0 };
-      let packProb = { count: 0, percentage: 0 };
-
-      issueDistribution.forEach(item => {
-        if (item.domain === 'GOOD_EXPERIENCE') goodExp = item;
-        else if (item.domain === 'FOOD_PROBLEM') foodProb = item;
-        else if (item.domain === 'PACKAGING_PROBLEM') packProb = item;
-      });
-
-      htmlContent = htmlContent.replace(/{{GOOD_EXPERIENCE_PCT}}/g, goodExp.percentage?.toFixed(1) || 0);
-      htmlContent = htmlContent.replace(/{{GOOD_EXPERIENCE_COUNT}}/g, goodExp.count?.toLocaleString() || 0);
-      htmlContent = htmlContent.replace(/{{FOOD_PROBLEM_PCT}}/g, foodProb.percentage?.toFixed(1) || 0);
-      htmlContent = htmlContent.replace(/{{FOOD_PROBLEM_COUNT}}/g, foodProb.count?.toLocaleString() || 0);
-      htmlContent = htmlContent.replace(/{{PACKAGING_PROBLEM_PCT}}/g, packProb.percentage?.toFixed(1) || 0);
-      htmlContent = htmlContent.replace(/{{PACKAGING_PROBLEM_COUNT}}/g, packProb.count?.toLocaleString() || 0);
-
-      // --- TIER 2 DATA ---
-      htmlContent = htmlContent.replace(/{{TIER2_INTERPRETATION}}/g, tier2.interpretation || '');
-      htmlContent = htmlContent.replace(/{{TIER2_TOTAL_REVIEWS}}/g, tier2.total_reviews?.toLocaleString() || 0);
-      htmlContent = htmlContent.replace(/{{TIER2_FOOD_PROBLEM_PCT}}/g, tier2.percentage_of_food_problem_reviews?.toFixed(1) || 0);
-
-      const qualityDimensions = tier2.quality_dimension_distribution || [];
-      let topQualityDim = qualityDimensions[0] || {};
-      htmlContent = htmlContent.replace(/{{TOP_QUALITY_DIMENSION}}/g, topQualityDim.concept || 'N/A');
-      htmlContent = htmlContent.replace(/{{TOP_QUALITY_COUNT}}/g, topQualityDim.review_count?.toLocaleString() || 0);
-
-      // Quality Dimensions HTML
-      const colorMap = {
-        'texture': 'from-red-500 to-orange-500',
-        'temperature': 'from-blue-500 to-cyan-500',
-        'salt_sweet_balance': 'from-amber-500 to-yellow-500',
-        'freshness': 'from-green-500 to-emerald-500'
-      };
-      
-      let qualityDimHTML = '';
-      qualityDimensions.forEach(dim => {
-        const gradient = colorMap[dim.concept] || 'from-primary to-accent-purple';
-        qualityDimHTML += `
-          <div>
-            <div class="flex justify-between items-center mb-2">
-              <span class="font-medium capitalize">${dim.concept?.replace(/_/g, ' ')}</span>
-              <span class="text-sm text-text-muted">${dim.review_count?.toLocaleString()} reviews (${dim.percentage_within_tier_2?.toFixed(1)}%)</span>
-            </div>
-            <div class="progress-bar">
-              <div class="progress-fill bg-gradient-to-r ${gradient}" style="width: ${Math.min(dim.percentage_within_tier_2 || 0, 100)}%"></div>
-            </div>
-          </div>
-        `;
-      });
-      htmlContent = htmlContent.replace(/{{QUALITY_DIMENSIONS}}/g, qualityDimHTML);
-
-      // --- TIER 3 DATA ---
-      htmlContent = htmlContent.replace(/{{TIER3_TOTAL_NEGATIVE}}/g, tier3.total_negative_food_reviews?.toLocaleString() || 0);
-
-      // Dish Table Rows
-      const dishFailures = tier3.top_10_dish_failures || [];
-      let dishRowsHTML = '';
-      dishFailures.forEach((dish, idx) => {
-        const fb = dish.failure_breakdown || {};
-        dishRowsHTML += `
-          <tr>
-            <td><span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-danger/20 text-danger text-sm font-bold">${idx + 1}</span></td>
-            <td class="font-semibold capitalize">${dish.dish}</td>
-            <td><span class="text-danger font-bold">${dish.total_negative_mentions?.toLocaleString()}</span></td>
-            <td>${fb.texture || 0}</td>
-            <td>${fb.temperature || 0}</td>
-            <td>${fb.taste_balance || 0}</td>
-            <td>${fb.cooking_quality || 0}</td>
-            <td>${fb.freshness || 0}</td>
-          </tr>
-        `;
-      });
-      htmlContent = htmlContent.replace(/{{DISH_ROWS}}/g, dishRowsHTML);
-
-      // Root Causes
-      const rootCauses = tier3.top_root_causes || [];
-      let rootCausesHTML = '';
-      const topRootCause = rootCauses[0] || {};
-      htmlContent = htmlContent.replace(/{{TOP_ROOT_CAUSE}}/g, topRootCause.phrase || 'N/A');
-      htmlContent = htmlContent.replace(/{{TOP_ROOT_CAUSE_COUNT}}/g, topRootCause.count?.toLocaleString() || 0);
-      htmlContent = htmlContent.replace(/{{TOP_ROOT_CAUSE_RATING}}/g, topRootCause.avg_rating?.toFixed(1) || 0);
-
-      rootCauses.forEach(cause => {
-        rootCausesHTML += `
-          <div class="concern-card rounded-xl p-4">
-            <div class="flex items-start justify-between mb-2">
-              <span class="root-cause-tag">${cause.phrase}</span>
-              <span class="text-xs text-text-muted">${cause.avg_rating?.toFixed(1)}★</span>
-            </div>
-            <div class="flex justify-between items-center text-sm">
-              <span class="text-text-muted capitalize">${cause.subtheme?.replace(/_/g, ' ')}</span>
-              <span class="font-bold text-danger">${cause.count?.toLocaleString()} <span class="text-xs font-normal">(${cause.percentage_of_food_complaints?.toFixed(1)}%)</span></span>
-            </div>
-          </div>
-        `;
-      });
-      htmlContent = htmlContent.replace(/{{ROOT_CAUSES}}/g, rootCausesHTML);
-
-      // --- TOP CONCERNS ---
-      const topConcerns = themeInsights.top_genuine_concerns || [];
-      let concernsHTML = '';
-      topConcerns.forEach((concern, idx) => {
-        const isFirst = idx < 2;
-        concernsHTML += `
-          <div class="${isFirst ? 'concern-card' : 'glass-card'} rounded-xl p-5">
-            <div class="flex items-start gap-4">
-              <div class="flex-shrink-0 w-10 h-10 rounded-lg ${isFirst ? 'bg-danger/20' : 'bg-primary/20'} flex items-center justify-center">
-                <span class="text-lg font-bold ${isFirst ? 'text-danger' : 'text-primary'}">#${idx + 1}</span>
-              </div>
-              <div class="flex-grow">
-                <div class="flex items-center justify-between mb-2">
-                  <h4 class="font-semibold capitalize">${concern.subtheme?.replace(/_/g, ' ')}</h4>
-                  <span class="tier-badge ${isFirst ? 'bg-danger/20 text-danger border-danger/30' : 'bg-primary/20 text-primary border-primary/30'}">${concern.theme}</span>
-                </div>
-                <div class="grid grid-cols-3 gap-3 text-sm mt-3">
-                  <div class="bg-background-dark/50 rounded p-2">
-                    <p class="text-text-muted text-xs">Concern Score</p>
-                    <p class="font-bold ${isFirst ? 'text-danger' : 'text-primary'}">${concern.concern_score?.toFixed(0)}</p>
-                  </div>
-                  <div class="bg-background-dark/50 rounded p-2">
-                    <p class="text-text-muted text-xs">Mentions</p>
-                    <p class="font-bold">${concern.negative_mentions?.toLocaleString()}</p>
-                  </div>
-                  <div class="bg-background-dark/50 rounded p-2">
-                    <p class="text-text-muted text-xs">Avg Rating</p>
-                    <p class="font-bold">${concern.avg_rating?.toFixed(2)}★</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        `;
-      });
-      htmlContent = htmlContent.replace(/{{TOP_CONCERNS}}/g, concernsHTML);
-
-      // --- QUOTE ITEMS ---
-      let quotesHTML = '';
-      quoteScoring.slice(0, 5).forEach((quote, idx) => {
-        quotesHTML += `
-          <div class="glass-card rounded-xl p-6">
-            <div class="quote-card">
-              <p class="text-lg font-medium mb-4">"${quote.phrase}"</p>
-              <div class="flex flex-wrap items-center gap-3">
-                <span class="tier-badge bg-danger/20 text-danger border-danger/30">
-                  <span class="material-symbols-outlined text-[14px] mr-1">star</span>
-                  ${quote.rating}★ Rating
-                </span>
-                <span class="tier-badge bg-primary/20 text-primary border-primary/30">
-                  <span class="material-symbols-outlined text-[14px] mr-1">score</span>
-                  ${quote.relevance_score?.toFixed(2)} Relevance
-                </span>
-                <span class="tier-badge bg-accent-purple/20 text-accent-purple border-accent-purple/30 capitalize">
-                  ${quote.subtheme?.replace(/_/g, ' ')}
-                </span>
-                <span class="text-xs text-text-muted ml-auto">Review #${quote.review_id}</span>
-              </div>
-            </div>
-          </div>
-        `;
-      });
-      htmlContent = htmlContent.replace(/{{QUOTE_ITEMS}}/g, quotesHTML);
-
-      // --- STATISTICAL TESTS ---
-      const anovaCity = statTests.anova_by_city || {};
-      const anovaCuisine = statTests.anova_by_cuisine || {};
-      const corrRatingLikes = statTests.correlation_rating_likes || {};
-
-      htmlContent = htmlContent.replace(/{{ANOVA_CITY_SIG}}/g, anovaCity.significant || 'N/A');
-      htmlContent = htmlContent.replace(/{{ANOVA_CITY_SIG_CLASS}}/g, anovaCity.significant === 'Yes' ? 'text-success' : 'text-warning');
-      htmlContent = htmlContent.replace(/{{ANOVA_CUISINE_SIG}}/g, anovaCuisine.significant || 'N/A');
-      htmlContent = htmlContent.replace(/{{ANOVA_CUISINE_SIG_CLASS}}/g, anovaCuisine.significant === 'Yes' ? 'text-success' : 'text-warning');
-      htmlContent = htmlContent.replace(/{{CORR_STRENGTH}}/g, corrRatingLikes.strength || 'N/A');
-
-      // Data Quality Score
-      const anomalyPct = outliers.anomaly_percentage || 0;
-      const dataQualityScore = Math.round(100 - anomalyPct);
-      htmlContent = htmlContent.replace(/{{DATA_QUALITY_SCORE}}/g, dataQualityScore);
-
-      // --- CITY ROWS ---
-      let cityRowsHTML = '';
-      Object.entries(byCity).forEach(([city, stats]) => {
-        const cv = stats["cv_%"] || 0;
-        const consistencyClass = cv < 47 ? 'text-success' : cv < 48 ? 'text-warning' : 'text-danger';
-        cityRowsHTML += `
-          <tr>
-            <td class="font-semibold">${city}</td>
-            <td>${stats.count?.toLocaleString()}</td>
-            <td>${stats.mean?.toFixed(2)}</td>
-            <td>${cv.toFixed(1)}%</td>
-            <td>
-              <div class="flex items-center gap-2">
-                <div class="progress-bar flex-grow" style="max-width: 100px;">
-                  <div class="progress-fill bg-gradient-to-r from-primary to-success" style="width: ${Math.max(0, 100 - cv)}%"></div>
-                </div>
-                <span class="${consistencyClass} text-xs font-semibold">${(100 - cv).toFixed(0)}%</span>
-              </div>
-            </td>
-          </tr>
-        `;
-      });
-      htmlContent = htmlContent.replace(/{{CITY_ROWS}}/g, cityRowsHTML);
-
-      // --- GENERATED AT ---
-      htmlContent = htmlContent.replace(/{{GENERATED_AT}}/g, new Date().toLocaleString());
-
-      // Apply HTML updates
-      container.innerHTML = htmlContent;
-
-      // --- RENDER CHARTS ---
-      renderCharts(issueDistribution, qualityDimensions);
-
-      // Hide loader, show content
-      document.getElementById('loadingMessage').style.display = 'none';
-      container.classList.remove('loading-cloak');
-      container.style.opacity = '1';
-    }
-
-    function renderCharts(issueDistribution, qualityDimensions) {
-      // Tier 1 Pie Chart
-      const tier1Ctx = document.getElementById('tier1PieChart');
-      if (tier1Ctx) {
-        const labels = issueDistribution.map(d => d.domain?.replace(/_/g, ' '));
-        const data = issueDistribution.map(d => d.count);
-        const colors = ['#10b981', '#ef4444', '#f59e0b'];
-
-        if (tier1Chart) tier1Chart.destroy();
-        tier1Chart = new Chart(tier1Ctx, {
-          type: 'doughnut',
-          data: {
-            labels: labels,
-            datasets: [{
-              data: data,
-              backgroundColor: colors,
-              borderColor: '#182327',
-              borderWidth: 3,
-              hoverOffset: 10
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            cutout: '55%',
-            plugins: {
-              legend: {
-                position: 'bottom',
-                labels: {
-                  color: '#e0e6e8',
-                  padding: 20,
-                  font: { family: 'Inter', size: 12, weight: 500 }
-                }
-              },
-              tooltip: {
-                backgroundColor: '#182327',
-                titleColor: '#e0e6e8',
-                bodyColor: '#94a3a8',
-                borderColor: '#2a3b42',
-                borderWidth: 1,
-                padding: 12,
-                callbacks: {
-                  label: function(ctx) {
-                    const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
-                    const pct = ((ctx.raw / total) * 100).toFixed(1);
-                    return `${ctx.raw.toLocaleString()} reviews (${pct}%)`;
-                  }
-                }
-              }
-            }
-          }
-        });
-      }
-
-      // Tier 2 Bar Chart
-      const tier2Ctx = document.getElementById('tier2BarChart');
-      if (tier2Ctx) {
-        const labels = qualityDimensions.map(d => d.concept?.replace(/_/g, ' '));
-        const data = qualityDimensions.map(d => d.review_count);
-        const colors = ['#ef4444', '#3b82f6', '#f59e0b', '#10b981'];
-
-        if (tier2Chart) tier2Chart.destroy();
-        tier2Chart = new Chart(tier2Ctx, {
-          type: 'bar',
-          data: {
-            labels: labels,
-            datasets: [{
-              label: 'Review Count',
-              data: data,
-              backgroundColor: colors,
-              borderRadius: 8,
-              borderSkipped: false
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            indexAxis: 'y',
-            plugins: {
-              legend: { display: false },
-              tooltip: {
-                backgroundColor: '#182327',
-                titleColor: '#e0e6e8',
-                bodyColor: '#94a3a8',
-                borderColor: '#2a3b42',
-                borderWidth: 1,
-                padding: 12
-              }
-            },
-            scales: {
-              x: {
-                grid: { color: 'rgba(42, 59, 66, 0.3)' },
-                ticks: { color: '#94a3a8', font: { family: 'Inter' } }
-              },
-              y: {
-                grid: { display: false },
-                ticks: { 
-                  color: '#e0e6e8', 
-                  font: { family: 'Inter', weight: 600 },
-                  callback: function(value) {
-                    return this.getLabelForValue(value).charAt(0).toUpperCase() + this.getLabelForValue(value).slice(1);
-                  }
-                }
-              }
-            }
-          }
-        });
+    function getStoredReport() {
+      const raw = localStorage.getItem(STORE_KEY);
+      if (!raw) return null;
+      try { return JSON.parse(raw); }
+      catch (e) {
+        console.error("Invalid JSON:", e);
+        return null;
       }
     }
 
-    // --- MAIN LOAD FUNCTION ---
-    function loadData() {
-      // Try to get data from localStorage
-    const storedData = JSON.parse(localStorage.getItem('analysis_result'));
-      
-      if (storedData) {
-        try {
-          const data = JSON.parse(storedData);
-          injectReportData(data);
-        } catch (err) {
-          console.error('Error parsing localStorage data:', err);
-          showError('Failed to parse data from localStorage');
-        }
-      } else {
-        // Fallback: try to fetch from file (for testing)
-        fetch('qualitative_report_data.json')
-          .then(res => {
-            if (!res.ok) throw new Error('HTTP error ' + res.status);
-            return res.json();
-          })
-          .then(data => injectReportData(data))
-          .catch(err => {
-            console.error('No data found:', err);
-            showError('No qualitative analysis data found. Please ensure data is stored in localStorage with key "qualitativeAnalysisData".');
-          });
-      }
-    }
+    function replaceTokens(map) {
+      const root = $("reportContainer");
+      let html = root.innerHTML;
 
-    function showError(message) {
-      const loader = document.getElementById('loadingMessage');
-      loader.innerHTML = `
-        <div class="max-w-lg mx-auto p-8 rounded-2xl border border-danger bg-surface-dark text-center">
-          <div class="w-16 h-16 rounded-full bg-danger/20 flex items-center justify-center mx-auto mb-4">
-            <span class="material-symbols-outlined text-danger text-3xl">error</span>
-          </div>
-          <h3 class="text-xl font-bold mb-3 text-danger">Data Not Found</h3>
-          <p class="text-text-muted mb-4">${message}</p>
-          <div class="text-left bg-background-dark rounded-lg p-4 text-sm">
-            <p class="font-semibold mb-2">To use this template:</p>
-            <ol class="list-decimal list-inside space-y-1 text-text-muted">
-              <li>Store your JSON data in localStorage</li>
-              <li>Use key: <code class="text-primary">"qualitativeAnalysisData"</code></li>
-              <li>Refresh this page</li>
-            </ol>
-            <pre class="mt-3 p-2 bg-surface-dark rounded text-xs overflow-x-auto">localStorage.setItem('qualitativeAnalysisData', JSON.stringify(yourData));</pre>
-          </div>
+      Object.entries(map).forEach(([key, value]) => {
+        const rgx = new RegExp(`{{${key}}}`, "g");
+        html = html.replace(rgx, value);
+      });
+
+      root.innerHTML = html;
+    }
+    function buildQualityDimensions(arr = []) {
+      return arr.map(d => `
+    <div>
+      <div class="flex justify-between items-center mb-2">
+        <span class="font-medium capitalize">${safe(d.concept).replaceAll("_", " ")}</span>
+        <span class="text-sm text-text-muted">
+          ${num(d.review_count).toLocaleString()} reviews (${fmt(d.percentage_within_tier_2)}%)
+        </span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill bg-gradient-to-r from-primary to-success"
+          style="width:${Math.min(num(d.percentage_within_tier_2), 100)}%">
         </div>
-      `;
+      </div>
+    </div>
+  `).join("");
     }
 
-    // Initialize on DOM ready
-    document.addEventListener('DOMContentLoaded', loadData);
+    function buildDishRows(rows = []) {
+      return rows.map((dish, i) => {
+        const f = dish.failure_breakdown || {};
+        return `
+      <tr>
+        <td>${i + 1}</td>
+        <td class="capitalize font-semibold">${safe(dish.dish)}</td>
+        <td>${num(dish.total_negative_mentions)}</td>
+        <td>${num(f.texture)}</td>
+        <td>${num(f.temperature)}</td>
+        <td>${num(f.taste_balance)}</td>
+        <td>${num(f.cooking_quality)}</td>
+        <td>${num(f.freshness)}</td>
+      </tr>
+    `;
+      }).join("");
+    }
+
+    function buildRootCauses(arr = []) {
+      return arr.map(x => `
+    <div class="concern-card rounded-xl p-4">
+      <div class="font-semibold">${safe(x.phrase)}</div>
+      <div class="text-sm text-text-muted mt-2 capitalize">
+        ${safe(x.subtheme).replaceAll("_", " ")}
+      </div>
+      <div class="mt-2 text-danger font-bold">${num(x.count)}</div>
+    </div>
+  `).join("");
+    }
+
+    function buildConcerns(arr = []) {
+      return arr.map((c, i) => `
+    <div class="glass-card rounded-xl p-5">
+      <div class="flex justify-between">
+        <h4 class="capitalize font-semibold">${safe(c.subtheme).replaceAll("_", " ")}</h4>
+        <span>#${i + 1}</span>
+      </div>
+      <div class="grid grid-cols-3 gap-3 mt-4 text-sm">
+        <div>${fmt(c.concern_score, 0)}</div>
+        <div>${num(c.negative_mentions)}</div>
+        <div>${fmt(c.avg_rating, 2)}★</div>
+      </div>
+    </div>
+  `).join("");
+    }
+
+    function buildQuotes(arr = []) {
+      return arr.slice(0, 5).map(q => `
+    <div class="glass-card rounded-xl p-6">
+      <div class="quote-card">
+        <p class="text-lg">"${safe(q.phrase)}"</p>
+        <div class="mt-4 text-sm text-text-muted">
+          ${safe(q.subtheme)} • ${fmt(q.relevance_score, 2)}
+        </div>
+      </div>
+    </div>
+  `).join("");
+    }
+
+    function buildCityRows(byCity = {}) {
+      return Object.entries(byCity).map(([city, stats]) => {
+        const cv = num(stats["cv_%"]);
+        return `
+      <tr>
+        <td>${city}</td>
+        <td>${num(stats.count)}</td>
+        <td>${fmt(stats.mean, 2)}</td>
+        <td>${fmt(cv, 1)}%</td>
+        <td>${fmt(100 - cv, 0)}%</td>
+      </tr>
+    `;
+      }).join("");
+    }
+
+    function renderCharts(issueDistribution = [], qualityDimensions = []) {
+      const pie = $("tier1PieChart");
+      const bar = $("tier2BarChart");
+
+      if (pie) {
+        if (tier1Chart) tier1Chart.destroy();
+        tier1Chart = new Chart(pie, {
+          type: "doughnut",
+          data: {
+            labels: issueDistribution.map(x => x.domain),
+            datasets: [{
+              data: issueDistribution.map(x => x.count),
+              backgroundColor: ["#10b981", "#ef4444", "#f59e0b"]
+            }]
+          }
+        });
+      }
+
+      if (bar) {
+        if (tier2Chart) tier2Chart.destroy();
+        tier2Chart = new Chart(bar, {
+          type: "bar",
+          data: {
+            labels: qualityDimensions.map(x => x.concept),
+            datasets: [{
+              data: qualityDimensions.map(x => x.review_count),
+              backgroundColor: ["#ef4444", "#3b82f6", "#f59e0b", "#10b981"]
+            }]
+          },
+          options: { indexAxis: "y" }
+        });
+      }
+    }
+
+    function injectReportData(data) {
+      const results = data.analysis_results?.results || {};
+
+      const quant = results.quantitative_analysis || {};
+      const themes = results.theme_insights || {};
+      const verb = results.multilayer_verbatim_analysis || {};
+      const quotes = results.quote_relevance_scoring || [];
+
+      const tier1 = verb.tier_1 || {};
+      const tier2 = verb.tier_2 || {};
+      const tier3 = verb.tier_3 || {};
+
+      const key = quant.stage_1_descriptive_statistics?.key_insights || {};
+      const byCity = quant.stage_1_descriptive_statistics?.by_city || {};
+      const tests = quant.stage_2_statistical_tests || {};
+      const outliers = quant.stage_3_outlier_detection || {};
+
+      const issues = tier1.issue_distribution || [];
+      const quality = tier2.quality_dimension_distribution || [];
+      const dishes = tier3.top_10_dish_failures || [];
+      const root = tier3.top_root_causes || [];
+      const concerns = themes.top_genuine_concerns || [];
+
+      const good = issues.find(x => x.domain === "GOOD_EXPERIENCE") || {};
+      const food = issues.find(x => x.domain === "FOOD_PROBLEM") || {};
+      const pack = issues.find(x => x.domain === "PACKAGING_PROBLEM") || {};
+
+      const topQuality = quality[0] || {};
+      const topRoot = root[0] || {};
+
+      const anomaly = num(outliers.anomaly_percentage);
+      const qualityScore = Math.round(100 - anomaly);
+
+      replaceTokens({
+        TOTAL_REVIEWS: safe(key["Total Reviews"], 0),
+        NUMBER_OF_CITIES: safe(key["Number of Cities"], 0),
+        NUMBER_OF_CUISINES: safe(key["Number of Cuisines"], 0),
+        NUMBER_OF_RESTAURANTS: safe(key["Number of Restaurants"], 0),
+        DATE_RANGE: safe(key["Date Range"], "N/A"),
+        AVERAGE_RATING: safe(key["Average Rating"], 0),
+        STD_DEV_RATING: safe(key["Std Dev Rating"], 0),
+        TOTAL_THEME_MENTIONS: safe(themes.summary?.total_theme_mentions, 0),
+        TOTAL_VALID_REVIEWS: safe(tier1.total_valid_reviews, 0),
+        GENERATED_AT: new Date().toLocaleString(),
+
+        GOOD_EXPERIENCE_PCT: fmt(good.percentage),
+        GOOD_EXPERIENCE_COUNT: num(good.count),
+        FOOD_PROBLEM_PCT: fmt(food.percentage),
+        FOOD_PROBLEM_COUNT: num(food.count),
+        PACKAGING_PROBLEM_PCT: fmt(pack.percentage),
+        PACKAGING_PROBLEM_COUNT: num(pack.count),
+
+        TIER2_INTERPRETATION: safe(tier2.interpretation, ""),
+        TIER2_TOTAL_REVIEWS: num(tier2.total_reviews),
+        TIER2_FOOD_PROBLEM_PCT: fmt(tier2.percentage_of_food_problem_reviews),
+        TOP_QUALITY_DIMENSION: safe(topQuality.concept, "N/A"),
+        TOP_QUALITY_COUNT: num(topQuality.review_count),
+
+        TIER3_TOTAL_NEGATIVE: num(tier3.total_negative_food_reviews),
+        TOP_ROOT_CAUSE: safe(topRoot.phrase, "N/A"),
+        TOP_ROOT_CAUSE_COUNT: num(topRoot.count),
+        TOP_ROOT_CAUSE_RATING: fmt(topRoot.avg_rating),
+
+        THEME_DENSITY:
+          key["Total Reviews"]
+            ? (num(themes.summary?.total_theme_mentions) / num(key["Total Reviews"])).toFixed(2)
+            : "0",
+
+        ANOVA_CITY_SIG: safe(tests.anova_by_city?.significant, "N/A"),
+        ANOVA_CITY_SIG_CLASS:
+          tests.anova_by_city?.significant === "Yes" ? "text-success" : "text-warning",
+
+        ANOVA_CUISINE_SIG: safe(tests.anova_by_cuisine?.significant, "N/A"),
+        ANOVA_CUISINE_SIG_CLASS:
+          tests.anova_by_cuisine?.significant === "Yes" ? "text-success" : "text-warning",
+
+        CORR_STRENGTH: safe(tests.correlation_rating_likes?.strength, "N/A"),
+        DATA_QUALITY_SCORE: qualityScore,
+        QUALITY_DIMENSIONS: buildQualityDimensions(quality),
+        DISH_ROWS: buildDishRows(dishes),
+        ROOT_CAUSES: buildRootCauses(root),
+        TOP_CONCERNS: buildConcerns(concerns),
+        QUOTE_ITEMS: buildQuotes(quotes),
+        CITY_ROWS: buildCityRows(byCity)
+      });
+
+      renderCharts(issues, quality);
+
+      $("loadingMessage").style.display = "none";
+      $("reportContainer").classList.remove("loading-cloak");
+    }
+
+    function showError(msg) {
+      $("loadingMessage").innerHTML = `
+    <div class="text-center max-w-md px-6">
+      <h3 class="text-xl font-bold text-danger mb-2">Unable to Load Report</h3>
+      <p class="text-text-muted">${msg}</p>
+    </div>
+  `;
+    }
+
+    function init() {
+      const report = getStoredReport();
+      if (!report) return showError("No analysis_result found in localStorage.");
+      injectReportData(report);
+    }
+
+    document.addEventListener("DOMContentLoaded", init);
   </script>
 
 </body>
